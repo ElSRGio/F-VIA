@@ -1,28 +1,31 @@
-/* --- VARIABLES DE DISEÑO --- */
+/* --- VARIABLES --- */
 :root {
   --primary: #0f172a;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --bg-body: #f8fafc;
-  --surface: #ffffff;
-  --text-main: #334155;
-  --text-light: #64748b;
+  --accent: #22c55e; /* Verde más acorde a Agro */
+  --bg-body: #0f172a; /* Fondo oscuro base */
+  --surface: rgba(255, 255, 255, 0.05); /* Glassmorphism base */
+  --text-main: #f1f5f9;
+  --text-light: #94a3b8;
   --danger: #ef4444;
   --success: #10b981;
-  
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  
-  --radius: 12px;
+  --radius: 16px;
 }
 
-/* --- FIX FULL SCREEN (ESTO ARREGLA TU PROBLEMA) --- */
+/* --- BASE & FONDO --- */
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Evita scroll horizontal innecesario */
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+  /* Fondo degradado profesional */
+  background-color: var(--bg-body);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(34, 197, 94, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
 }
 
 #root {
@@ -32,159 +35,74 @@ html, body {
   flex-direction: column;
 }
 
-/* --- RESET --- */
 * { box-sizing: border-box; }
 
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 /* --- LAYOUT PRINCIPAL --- */
 .app-container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
   min-height: 100vh;
-}
-
-/* --- NAVBAR --- */
-.navbar {
-  background: var(--surface);
-  height: 70px;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid #e2e8f0;
   width: 100%;
 }
 
-.nav-brand {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 1.3rem; font-weight: 800; color: var(--primary);
-}
-
-.menu-btn {
-  background: transparent; border: 1px solid #e2e8f0;
-  border-radius: 8px; padding: 8px; cursor: pointer;
-  color: var(--text-main); display: flex;
-}
-
-.user-info {
-  background: #eff6ff; color: var(--accent);
-  padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;
-}
-
-/* --- SIDEBAR --- */
-.sidebar {
-  position: fixed; left: -300px; top: 70px; bottom: 0; width: 300px;
-  background: var(--surface); border-right: 1px solid #e2e8f0;
-  padding: 1.5rem; transition: transform 0.3s ease; z-index: 90;
-  box-shadow: 4px 0 15px rgba(0,0,0,0.05);
-}
-.sidebar.open { transform: translateX(300px); }
-
-.sidebar button {
-  width: 100%; background: transparent; border: none;
-  padding: 14px 16px; text-align: left; font-size: 1rem;
-  color: var(--text-main); border-radius: 8px; cursor: pointer;
-  display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
-}
-.sidebar button:hover { background: #f8fafc; color: var(--accent); }
-.logout-btn { margin-top: 2rem; color: var(--danger) !important; }
-
-/* --- CONTENIDO PRINCIPAL (FULL WIDTH) --- */
 .main-content {
   flex: 1;
-  width: 100%;          /* Ocupa el 100% del ancho disponible */
-  max-width: 100%;      /* Sin límites */
-  padding: 2rem 3rem;   /* Espacio interno */
-  margin: 0;            /* Sin márgenes externos */
-  overflow-x: hidden;   /* Evita desbordes */
+  width: 100%;
+  padding: 1.5rem;
+  padding-top: 4rem; /* Espacio para el botón móvil hamburguesa */
 }
 
-/* --- DASHBOARD VIEW --- */
-.dashboard-view {
-  width: 100%; /* Asegura que el contenedor interno también se estire */
+@media (min-width: 768px) {
+  .main-content {
+    padding: 2.5rem;
+    padding-top: 2.5rem;
+  }
 }
 
 /* --- LOGIN --- */
+/* Si usas el componente Login.jsx, asegúrate de que use clases Tailwind o estas: */
 .login-wrapper {
   height: 100vh; width: 100%; display: flex;
-  justify-content: center; align-items: center; background: #f8fafc;
-}
-.login-card {
-  background: white; padding: 3rem; border-radius: 24px;
-  box-shadow: var(--shadow-md); width: 90%; max-width: 400px;
-  text-align: center; border: 1px solid #e2e8f0;
-}
-.login-card input {
-  width: 100%; padding: 14px; margin: 10px 0;
-  border: 1px solid #e2e8f0; border-radius: 10px;
-}
-.login-card button {
-  width: 100%; padding: 14px; margin-top: 20px;
-  background: var(--accent); color: white; border: none;
-  border-radius: 10px; font-weight: bold; cursor: pointer;
+  justify-content: center; align-items: center; 
 }
 
-/* --- TABLA (ESTIRADA AL 100%) --- */
-.actions-bar {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;
-  width: 100%;
-}
-
-.export-btn {
-  background: #10b981; color: white; border: none;
-  padding: 12px 24px; border-radius: 10px; cursor: pointer;
-  display: flex; gap: 8px; align-items: center; font-weight: 600;
-}
-
-.table-responsive {
-  width: 100%; /* OBLIGATORIO: Ancho total */
-  display: block; /* Asegura comportamiento de bloque */
-  background: var(--surface); border-radius: var(--radius);
-  box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0;
-  overflow-x: auto; /* Scroll si es muy pequeño */
-}
-
+/* --- ESTILOS GLOBALES DE TABLAS (Si no usas Tailwind en Dashboard) --- */
 table { 
-  width: 100%; /* Tabla estirada al 100% */
-  border-collapse: collapse; 
-  table-layout: auto; /* Ajuste automático de columnas */
+  width: 100%; 
+  border-collapse: separate; 
+  border-spacing: 0;
+}
+thead { background: rgba(255,255,255,0.05); }
+th { 
+  text-align: left; padding: 16px; 
+  color: var(--text-light); font-size: 0.75rem; 
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+td { 
+  padding: 16px; 
+  border-bottom: 1px solid rgba(255,255,255,0.05); 
 }
 
-thead { background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
-th { text-align: left; padding: 20px; color: var(--text-light); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
-td { padding: 20px; border-bottom: 1px solid #f1f5f9; color: var(--text-main); }
-
-/* --- PILLS --- */
-.status-pill { display: inline-flex; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 700; }
-.status-pill.ok { background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
-.status-pill.warn { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-
-/* --- CAMARA --- */
-.scanner-container { text-align: center; padding-top: 2rem; width: 100%; }
-.camera-box {
-  max-width: 600px; margin: 0 auto; border-radius: 24px; overflow: hidden;
-  box-shadow: var(--shadow-md); position: relative; border: 4px solid #e2e8f0;
+/* --- SCROLLBAR PERSONALIZADO --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-.overlay-result {
-  position: absolute; bottom: 0; width: 100%;
-  background: rgba(255,255,255,0.95); padding: 1.5rem;
-  font-weight: 800; color: var(--primary); border-top: 1px solid #e2e8f0;
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2); 
 }
-
-/* --- MÓVIL --- */
-@media (max-width: 768px) {
-  .main-content { padding: 1rem; }
-  th, td { padding: 12px; }
-  .actions-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .export-btn { width: 100%; justify-content: center; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3); 
 }
