@@ -7,14 +7,23 @@ function App() {
   const [cargando, setCargando] = useState(false)
 
   // 1. CONFIGURACIÓN DE CONEXIÓN
-  // Usamos la IP de tu computadora para que el celular pueda entrar
-  // En src/App.jsx
+  // Tu URL de Ngrok (La que termina en /api/datos)
   const API_URL = "https://unfantastically-wormish-jeni.ngrok-free.dev/api/datos"
 
+  // Función para pedir los datos
   const obtenerDatos = async () => {
     try {
-      // Petición GET a tu servidor Python local
-      const respuesta = await axios.get(API_URL)
+      // CONFIGURACIÓN MÁGICA PARA NGROK
+      // Este header evita que Ngrok bloquee la petición con la pantalla de advertencia
+      const config = {
+        headers: {
+          "ngrok-skip-browser-warning": "true", 
+        }
+      };
+
+      // Hacemos la petición usando esa configuración
+      const respuesta = await axios.get(API_URL, config)
+      
       if (respuesta.data) {
         setDatos(respuesta.data)
       }
