@@ -1,0 +1,129 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.dashboard-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+h1 {
+  color: #1a1a1a;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  background-color: #e6f7ff;
+  color: #0050b3;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #52c41a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+  animation: pulse 1.5s infinite;
+}
+
+/* Tarjetas */
+.cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-left: 6px solid #ccc;
+  transition: transform 0.2s;
+}
+
+.card:active {
+  transform: scale(0.98); /* Efecto al tocar en celular */
+}
+
+/* Estilos dinámicos */
+.card.primera {
+  border-left-color: #ff4d4f; /* ROJO JITOMATE */
+}
+
+.card.segunda {
+  border-left-color: #73d13d; /* VERDE */
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calidad-tag {
+  background-color: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.hora {
+  color: #8c8c8c;
+  font-size: 0.85rem;
+}
+
+h2 {
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+}
+
+p {
+  color: #595959;
+  font-size: 0.9rem;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 50px;
+  color: #888;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(82, 196, 26, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(82, 196, 26, 0); }
+}
