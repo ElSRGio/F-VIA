@@ -42,9 +42,9 @@ function App() {
   return (
     <div className="dashboard-container">
       <header className="header">
-        <h1>🍅 Agro-Tech Monitor</h1>
+        <h1>🍅 F-VIA</h1>
         <div className="status-badge">
-          <span className="dot"></span> En Vivo: Azure Cloud
+          <span className="dot"></span> En Vivo: Desde PC ELSRG
         </div>
       </header>
 
